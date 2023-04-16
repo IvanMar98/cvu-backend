@@ -1,8 +1,10 @@
 // importamos la conexion de la base de datos
-import db from '../database/db.js'
+import db from '../database/db.js';
+//importamos modelo de los estados
+import estadoModel from './estadoModel.js';
 
 // importamos de sequelize
-import {DataTypes, Sequelize} from 'sequelize'
+import {DataTypes} from 'sequelize'
 
 //definimos el modelo
 
@@ -22,5 +24,19 @@ const paisModel = db.define('pais', {
     timestamps:false
 });
 
+/**
+ *  relacion con modelo estado
+ * id_pais es foreign key en tabla estado
+*/
+
+paisModel.hasMany(estadoModel, {
+    foreignKey: 'id_pais'
+});
+estadoModel.belongsTo(paisModel, {
+    foreignKey: 'id_pais'
+});
+
+await paisModel.sync();
+await estadoModel.sync();
 //exportamos el modelo 
 export default paisModel;

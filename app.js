@@ -2,15 +2,22 @@ import express from "express";
 import cors from "cors";
 
 import db from "./src/database/db.js";
+import './src/models/paisModel.js';
+import routerPais from "./src/routes/paisRoutes.js";
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+/**
+ * Rutas pais
+ */
+app.use('/registro-pais', routerPais);
+
 try {
     await db.sync({force: false});
     console.log("Conexion exitos a la Data Base");
-    
 } catch (error) {
     console.log(`El error de la conexion es: ${error}`)    
 }
