@@ -13,7 +13,7 @@ export const createNewRegistry = async(req, res) =>{
             });
         }else{
             res.status(201).send({
-                status: 'succes',
+                status: 'success',
                 data: newRegistry
             });
             console.log(newRegistry)

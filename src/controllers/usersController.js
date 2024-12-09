@@ -13,7 +13,7 @@ export const createNewUser = async(req, res) =>{
             });
         }else{
             res.status(201).send({
-                status: 'succes',
+                status: 'success',
                 data: newUser
             });
             console.log(newUser)
