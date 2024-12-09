@@ -6,6 +6,7 @@ import './src/models/paisModel.js';
 import './src/models/registryModel.js'
 import routerPais from "./src/routes/paisRoutes.js";
 import routeRegistry from "./src/routes/registryRoutes.js";
+import routerLogin from "./src/routes/loginRoutes.js";
 
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
  */
 app.use('/registro-pais', routerPais);
 app.use('/new-registry', routeRegistry);
+app.use('/login', routerLogin);
 
 try {
     await db.sync({force: false});
