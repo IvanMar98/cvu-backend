@@ -22,3 +22,22 @@ export const createNewUser = async(req, res) =>{
         console.log(error);
     }
 };
+
+export const getInfoUser = async(req, res) => {
+    try {
+        const user = await usersModel.findByPk(req.params.user_id);
+        if(user === null) {
+            res.status(404).send({
+                status: 'error',
+                message: 'User not found'
+            });
+        }else {
+            res.status(200).send({
+                status: 'success',
+                data: user
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
