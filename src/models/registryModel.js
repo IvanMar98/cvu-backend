@@ -28,19 +28,22 @@ const registryModel = db.define('registries', {
     },
     curp: {
         type: STRING(18),
-        allowNull: false
+        allowNull: false,
+        unique:true
     },
     rfc: {
         type: STRING(13),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     email: {
         type: STRING(50),
-        allowNull:false
+        allowNull:false,
+        unique: true
     },
     password: {
         type: STRING(72),
-        allowNull: false
+        allowNull: false,
     }
 },
 {
