@@ -51,12 +51,34 @@ const registryModel = db.define('registries', {
     timestamps:false
 });
 
-usersModel.belongsTo(usersModel, {
+usersModel.belongsTo(registryModel, {
     foreignKey: 'registry_id'
 });
 
 // Hook para encriptar contraseña antes de guardar
 registryModel.addHook('beforeCreate', async (registry, options) => {
+
+    const existingCurp = await registryModel.findOne({ where: { curp: registry.curp}});
+    if(existingCurp) {
+        const error = new Error('El CURP ya está registrado.');
+        error.field = 'curp';
+        throw error;
+    }
+
+    const existingRfc = await registryModel.findOne({ where: { rfc: registry.rfc } });
+    if (existingRfc) {
+        const error = new Error('El RFC ya está registrado.');
+        error.field = 'rfc';
+        throw error;
+    }
+
+    const existingEmail = await registryModel.findOne({ where: { email: registry.email } });
+    if (existingEmail) {
+        const error = new Error('El email ya está registrado.');
+        error.field = 'email';
+        throw error;
+    }
+    
     const saltRounds = 10; // Nivel de complejidad de la encriptación
     registry.password = await bcrypt.hash(registry.password, saltRounds);
 });
