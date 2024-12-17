@@ -1,4 +1,4 @@
-export const verifyData = (err, req, res, next) => {
+export const verifyRegistryData = (err, req, res, next) => {
     if (err.field) {
         return res.status(409).json({
             status: 'error',
