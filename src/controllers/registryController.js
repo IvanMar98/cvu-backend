@@ -18,18 +18,6 @@ export const createNewRegistry = async(req, res, next) =>{
           data: newRegistry
       });
     } catch (error) {
-        console.log(error);
-        if (error.name === 'SequelizeUniqueConstraintError') {
-            return res.status(409).json({
-              status: 'error',
-              message: 'El registro ya existe. Por favor, elige valores únicos.',
-              errors: error.errors.map((err) => ({
-                field: err.path,
-                message: err.message,
-              })),
-            });
-          }
-      
-          next(error);
+      next(error);
     }
 };
