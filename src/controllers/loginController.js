@@ -8,16 +8,22 @@ export const login = async(req, res) => {
         const user = await usersModel.findOne({ where: { email } });
 
         if(!user){
-            return res.status(401).send('Credenciales incorrectas');
+            return res.status(404).json({
+                status: 'error',
+                message: 'Usuario no registrado'
+            });
         }
         
         const correctPassword = await bcrypt.compare(password, user.password);
 
         if(!correctPassword) {
-            return res.status(401).send('Credenciales incorrectas');
+            return res.status(401).json({
+                status: 'error',
+                message: 'Credenciales incorrectas'
+            });
         }
 
-        const token = jwt.sign({ id: user.user_id }, 'secret_password', { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.user_id }, 'secret_password', { expiresIn: '10m' });
         console.log('Generar token', token)
         res.status(200).json({
             status: {
