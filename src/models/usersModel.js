@@ -51,6 +51,10 @@ const usersModel = db.define('users', {
     countryOfBirth: {
         type: STRING(45),
         allowNull: true
+    },
+    image_profile: {
+        type: STRING(100),
+        allowNull: true
     }
 },
 {

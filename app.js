@@ -8,13 +8,15 @@ import routerPais from "./src/routes/paisRoutes.js";
 import routeRegistry from "./src/routes/registryRoutes.js";
 import routerLogin from "./src/routes/loginRoutes.js";
 import routerUser from "./src/routes/usersRouter.js";
+import routerImageProfile from "./src/routes/imageProfileRoutes.js"
+import routerAuth from './src/routes/authRoutes.js'
 import { verifyRegistryData } from "./src/middleware/verifyUserDataMiddleware.js";
-
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/uploads', express.static('uploads'));
 /**
  * Rutas pais
  */
@@ -25,6 +27,8 @@ app.use('/login', routerLogin);
 app.use('/info-user', routerUser);
 app.use('/users', routerUser);
 app.use('/update-info', routerUser);
+app.use('/update-image-profile', routerImageProfile);
+app.use('/verify-auth', routerAuth);
 
 app.use(verifyRegistryData);
 

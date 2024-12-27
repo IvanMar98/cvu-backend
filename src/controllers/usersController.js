@@ -66,7 +66,6 @@ export const updateInfoUser = async (req, res, next) => {
 
     try {
         const findUser = await usersModel.findByPk(req.params.user_id);
-        console.log('find user',findUser)
         if(!findUser) {
             return res.status(404).json({
                 status: "error",
