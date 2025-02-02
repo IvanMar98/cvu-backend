@@ -29,18 +29,21 @@ export const getPaises = async(req, res) =>{
     try {
         const paises = await paisModel.findAll();
         if(paises.length <= 0){
-            res.status(404).send({
+            res.status(404).json({
                 status: 'error',
                 message: 'Paises not found'
             });
         } else{
-            res.status(200).send({
+            res.status(200).json({
                 status: 'succes',
                 data: paises
             });
         }
     } catch (error) {
-        console.log(error);
+       res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+       })
     }
     
 };

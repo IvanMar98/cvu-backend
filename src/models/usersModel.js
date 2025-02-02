@@ -55,6 +55,10 @@ const usersModel = db.define('users', {
     image_profile: {
         type: STRING(100),
         allowNull: true
+    },
+    biography: {
+        type: STRING(500),
+        allowNull: true
     }
 },
 {
